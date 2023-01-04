@@ -1,0 +1,11 @@
+.book {
+   display: flex;
+   flex-direction: column;
+   flex: 4 1 0;
+
+   &Categories {
+      display: flex;
+      justify-content: center;
+      margin-bottom: 100px;
+   }
+}
