@@ -21,11 +21,19 @@ function Livres() {
           activeCategory={activeCategory}
         />
       </div>
-      {bookList.map((book) =>
-        !activeCategory || activeCategory === book.category ? (
-          <BookCard key={book.name} book={book} />
-        ) : null
-      )}
+      <div className={styles["bookEncadrement"]}>
+        {bookList.map((book) =>
+          !activeCategory || activeCategory === book.category ? (
+            <BookCard
+              key={book.name}
+              pagesLues={book.pagesLues}
+              pagesTotales={book.pagesTotales}
+              name={book.name}
+              cover={book.cover}
+            />
+          ) : null
+        )}
+      </div>
     </div>
   );
 }
