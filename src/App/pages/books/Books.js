@@ -1,16 +1,16 @@
-import styles from "./Livres.module.scss";
+import styles from "./Books.module.scss";
 import { bookList } from "../../../data/bookList";
 import { useState } from "react";
 import Categories from "./Categories/Categories";
 import BookCard from "./BookCard/BookCard";
 
-function Livres() {
+function Books() {
+  const [activeCategory, setActiveCategory] = useState("");
   const categories = bookList.reduce(
     (acc, book) =>
       acc.includes(book.category) ? acc : acc.concat(book.category),
     []
   );
-  const [activeCategory, setActiveCategory] = useState("");
 
   return (
     <div className={styles["book"]}>
@@ -22,20 +22,16 @@ function Livres() {
         />
       </div>
       <div className={styles["bookEncadrement"]}>
-        {bookList.map((book) =>
-          !activeCategory || activeCategory === book.category ? (
-            <BookCard
-              key={book.name}
-              pagesLues={book.pagesLues}
-              pagesTotales={book.pagesTotales}
-              name={book.name}
-              cover={book.cover}
-            />
-          ) : null
-        )}
+        {bookList
+          .filter((book) => !activeCategory || activeCategory === book.category)
+          .map((book) => (
+            <a key={book.name} href={`/books/${book.name}`}>
+              <BookCard {...book} />
+            </a>
+          ))}
       </div>
     </div>
   );
 }
 
-export default Livres;
+export default Books;
