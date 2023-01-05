@@ -1,5 +1,5 @@
 import styles from "./Livres.module.scss";
-import { bookList } from "../data/bookList";
+import { bookList } from "../../../data/bookList";
 import { useState } from "react";
 import Categories from "./Categories/Categories";
 import BookCard from "./BookCard/BookCard";

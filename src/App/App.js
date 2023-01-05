@@ -1,5 +1,5 @@
 import styles from "./App.module.scss";
-import Livres from "../Livres/Livres";
+import Livres from "./pages/books/Livres";
 import logo from "../assets/livresLogo.jpg";
 
 function App() {
