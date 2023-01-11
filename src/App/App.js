@@ -24,9 +24,7 @@ function Home() {
         <h1>Le livre de livres</h1>
         <img src={logo} alt="logo de livres" />
       </div>
-      <div className={styles["content"]}>
-        <Books />
-      </div>
+      <Books />
     </div>
   );
 }

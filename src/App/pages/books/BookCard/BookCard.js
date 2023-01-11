@@ -10,7 +10,8 @@ export default function BookCard({ pagesLues, pagesTotales, label, cover }) {
       />
       <div className={styles["bookName"]}>{label}</div>
       <ProgressBar value={(pagesLues / pagesTotales) * 100} />
-      <div>
+      <div>{pagesLues === pagesTotales && "Félicitation"}</div>
+      <div className={styles["bookText"]}>
         Vous avez lu {pagesLues} page{pagesLues > 1 && "s"} sur {pagesTotales}
       </div>
     </div>

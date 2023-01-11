@@ -5,8 +5,20 @@
 
    &Categories {
       display: flex;
-      justify-content: center;
+
       margin-bottom: 100px;
+      margin-left: 80px;
+   }
+
+   &CardEncadrement {
+      display: flex;
+      flex-direction: column;
+      align-items: center;
+
+      & a {
+         display: flex;
+         align-items: center;
+      }
    }
 
    &Encadrement {
@@ -18,6 +30,10 @@
       & a {
          text-decoration: none;
          color: black;
+      }
+
+      & button {
+         margin-right: 60px;
       }
    }
 }
