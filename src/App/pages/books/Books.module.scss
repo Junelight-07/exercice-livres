@@ -1,13 +1,13 @@
 .book {
    display: flex;
-   flex-direction: column;
    flex: 4 1 0;
 
    &Categories {
       display: flex;
 
       margin-bottom: 100px;
-      margin-left: 80px;
+      margin-left: 40px;
+
    }
 
    &CardEncadrement {
@@ -25,7 +25,6 @@
       display: flex;
       flex-wrap: wrap;
       justify-content: center;
-      margin-left: 30px;
 
       & a {
          text-decoration: none;
@@ -35,5 +34,25 @@
       & button {
          margin-right: 60px;
       }
+   }
+
+   &-left {
+      display: flex;
+      flex: 0.7;
+
+      &Favorites {
+         text-decoration: none;
+         color: blue;
+         font-variant: all-small-caps;
+         font-size: 20px;
+         margin-left: 30px;
+      }
+
+   }
+
+   &-right {
+      display: flex;
+      flex-direction: column;
+      flex: 4;
    }
 }

@@ -1,11 +1,10 @@
-import { useParams } from "react-router-dom";
-import { bookList } from "../../../data/bookList";
+import { Link, useParams } from "react-router-dom";
+import books from "../../../data/books";
 import styles from "./Book.module.scss";
-import { Link, useSearchParams } from "react-router-dom";
 
 export default function Book() {
   const { name } = useParams();
-  const book = bookList.find((bookListBook) => bookListBook?.name === name);
+  const book = books.find((b) => b?.name === name);
 
   if (!book) return "book does not exist";
   return (

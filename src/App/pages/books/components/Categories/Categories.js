@@ -1,7 +1,6 @@
-import styles from "./Categories.module.scss";
-import { useState } from "react";
-import React from "react";
+import React, { useState } from "react";
 import { useSearchParams } from "react-router-dom";
+import styles from "./Categories.module.scss";
 
 export default function Categories(props) {
   const [searchParams, setSearchParams] = useSearchParams();
@@ -18,12 +17,12 @@ export default function Categories(props) {
     }
     setSearchParams(params);
   };
+
   const reset = (e) => {
     e.preventDefault();
     const params = new URLSearchParams(searchParams);
     params.delete("search");
     setSearchParams(params);
-    console.log(inputValue);
     setInputValue("");
   };
   return (
