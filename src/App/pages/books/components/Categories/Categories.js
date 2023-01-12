@@ -18,7 +18,7 @@ export default function Categories(props) {
     setSearchParams(params);
   };
 
-  const reset = (e) => {
+  const resetResearch = (e) => {
     e.preventDefault();
     const params = new URLSearchParams(searchParams);
     params.delete("search");
@@ -51,7 +51,7 @@ export default function Categories(props) {
           value={inputValue}
           onChange={(e) => setInputValue(e.target.value)}
         />{" "}
-        <button type="submit" onClick={reset}>
+        <button type="submit" onClick={resetResearch}>
           Réinitialiser
         </button>
       </form>
