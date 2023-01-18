@@ -1,47 +1,39 @@
-.book {
-   &Name {
-      display: flex;
-      justify-content: center;
-      padding-top: 10px;
-      padding-bottom: 10px;
-      border: 2px solid red;
-      border-radius: 10px;
-      width: 150px;
-      margin-top: 20px;
-      margin-bottom: 5px;
-      height: 20px;
-   }
+.book-card {
+   width: 225px;
+   height: 100%;
+   display: flex;
+   flex-direction: column;
+   justify-content: space-between;
+   align-items: center;
+   text-align: center;
 
-   &Card {
-      display: flex;
-      flex-direction: column;
-      width: 225px;
-      height: 360px;
-      margin-right: 60px;
-      margin-bottom: 30px;
-      justify-content: center;
-      text-align: center;
-      align-items: center;
+   .content {
+      .cover {
+         height: 200px;
+         width: 200px;
+         object-fit: cover;
+         border-radius: 20px;
+         margin-bottom: 12px;
+      }
+
+      .name {
+         display: inline-block;
+         padding: 6px 12px;
+         border: 2px solid red;
+         border-radius: 10px;
+         margin: auto;
+         margin-bottom: 12px;
+      }
 
       & progress {
          height: 20px;
          width: 100%;
+         margin-bottom: 12px;
+      }
+
+      .text {
+         margin-bottom: 12px;
+
       }
    }
-
-   &-item-cover {
-      height: 200px;
-      width: 200px;
-      object-fit: cover;
-      border-radius: 20px;
-   }
-
-   &Text {
-      margin-bottom: 10px;
-   }
-}
-
-#bookProgressBar {
-   display: contents;
-   background-color: red;
 }

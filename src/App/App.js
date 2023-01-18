@@ -6,6 +6,7 @@ import Book from "./pages/Book/index";
 import Favorites from "./pages/Books/components/Favorites/Favorites";
 import logo from "../assets/livresLogo.jpg";
 import BooksContextProvider from "../context/BooksContext";
+import Context from "../test/Context";
 
 export default function App() {
   return (
@@ -16,6 +17,7 @@ export default function App() {
           <Route path="/books" element={<Home />} />
           <Route path="/books/:name" element={<Book />} />
           <Route path="/books/favorites" element={<Favorites />} />
+          <Route path="/test" element={<Context />} />
         </Routes>
       </BrowserRouter>
     </BooksContextProvider>

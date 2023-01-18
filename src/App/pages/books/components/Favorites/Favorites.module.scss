@@ -1,46 +1,15 @@
 .favorite {
-   &Content {
-      align-items: center;
+   display: flex;
+   flex-direction: column;
+
+   .book-cards {
       display: flex;
-      flex-direction: column;
-   }
-
-   &ReturnHome {
-      text-decoration: none;
-      color: blue;
-      font-size: 20px;
-      position: fixed;
-      bottom: 0;
-      margin-bottom: 15px;
-      width: 100%;
-      text-align: center;
-
-   }
-
-   &Results {
-      display: flex;
-      height: 50vh;
-      width: 100%;
       justify-content: center;
+      flex-wrap: wrap;
+      margin-top: 35px;
 
-      &Content {
-         display: flex;
-         flex-direction: column;
-         height: 360px;
-         width: 225px;
-         margin-right: 60px;
-         margin-bottom: 30px;
+      >a {
+         margin: 15px;
       }
-
-      &Encadrement {}
-   }
-
-   &Title {
-      display: flex;
-      margin-bottom: 50px;
-      margin-top: 20px;
-      font-size: 20px;
-      font-weight: bold;
-      text-align: center;
    }
 }

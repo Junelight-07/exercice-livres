@@ -1,63 +1,104 @@
 import React, { useState, useContext, useEffect } from "react";
 import dataBooks from "../data/books";
 
+const INITIAL_FILTERS = { category: "", search: "" };
 const BooksContext = React.createContext({ books: [], addFavorite: () => {} });
 
 export const useBooksContext = () => useContext(BooksContext);
 
 export default function BooksContextProvider({ children }) {
-  const [books, setBooks] = useState([]);
+  const [filters, setFilters] = useState(INITIAL_FILTERS);
+  const [favoriteBooks, setFavoriteBooks] = useState([]);
+  const [filteredBooks, setFilteredBooks] = useState([]);
+
+  const categories = dataBooks.reduce(
+    (acc, book) =>
+      acc.includes(book.category) ? acc : acc.concat(book.category),
+    []
+  );
 
   useEffect(() => {
-    if (getBooks()) {
-      setBooks(getBooks());
-    } else {
-      setBooks(dataBooks);
+    if (getLocalFilters()) {
+      setFilters(getLocalFilters());
+    }
+    if (getLocalFavorites()) {
+      setFavoriteBooks(getLocalFavorites());
     }
   }, []);
 
-  function filter() {}
+  useEffect(() => {
+    setFilteredBooks(
+      dataBooks
+        .filter((book) => {
+          if (filters.search) return book.name.includes(filters.search);
+          else return book;
+        })
+        .filter(
+          (book) => !filters.category || filters.category === book.category
+        )
+    );
+  }, [filters]);
 
-  function clearFilter() {}
+  function onCategory(category) {
+    setFilters((curr) => ({ ...curr, category }));
+    saveLocalFilters({ ...filters, category });
+  }
 
-  function search() {}
+  function onSearch(search) {
+    setFilters((curr) => ({ ...curr, search }));
+    saveLocalFilters({ ...filters, search });
+  }
 
-  function clearSearch() {}
+  function onResetFilters() {
+    setFilters(INITIAL_FILTERS);
+    localStorage.removeItem("filters");
+  }
 
   function addFavorite(name) {
-    const b = books.map((book) => {
-      if (book.name === name) {
-        return { ...book, favorite: true };
-      } else {
-        return book;
-      }
-    });
-    setBooks(b);
-    saveBooks(b);
+    const books = [...favoriteBooks].concat(
+      dataBooks.find((book) => book.name === name)
+    );
+    setFavoriteBooks(books);
+    saveLocalFavorites(books);
   }
 
   function removeFavorite(name) {
-    const b = books.map((book) => {
-      if (book.name === name) {
-        return { ...book, favorite: false };
-      } else {
-        return book;
-      }
-    });
-    setBooks(b);
-    saveBooks(b);
+    const books = favoriteBooks.filter((book) => book.name !== name);
+    setFavoriteBooks(books);
+    saveLocalFavorites(books);
   }
 
-  function saveBooks(b) {
-    localStorage.setItem("books", JSON.stringify(b));
+  function saveLocalFilters(values) {
+    localStorage.setItem("filters", JSON.stringify(values));
   }
 
-  function getBooks() {
-    return JSON.parse(localStorage.getItem("books"));
+  function getLocalFilters() {
+    return JSON.parse(localStorage.getItem("filters"));
+  }
+
+  function saveLocalFavorites(values) {
+    localStorage.setItem("favorites", JSON.stringify(values));
+  }
+
+  function getLocalFavorites() {
+    return JSON.parse(localStorage.getItem("favorites"));
   }
 
   return (
-    <BooksContext.Provider value={{ books, addFavorite, removeFavorite }}>
+    <BooksContext.Provider
+      value={{
+        books: dataBooks,
+        categories,
+        filters,
+        filteredBooks,
+        favoriteBooks,
+        addFavorite,
+        removeFavorite,
+        onCategory,
+        onSearch,
+        onResetFilters,
+      }}
+    >
       {children}
     </BooksContext.Provider>
   );

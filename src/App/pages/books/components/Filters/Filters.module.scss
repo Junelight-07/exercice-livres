@@ -1,0 +1,8 @@
+.filters {
+   display: flex;
+
+   & form {
+      right: 0px;
+      position: fixed;
+   }
+}
