@@ -9,10 +9,12 @@ function Books() {
 
   return (
     <div className={styles["books"]}>
-      <Filters />
-      <Link to={`/books/favorites`}>
-        <div>Favoris</div>
-      </Link>
+      <div className={styles["books-menu"]}>
+        <Filters />
+        <Link to={`/books/favorites`}>
+          <div>Favoris</div>
+        </Link>
+      </div>
       <div className={styles["book-cards"]}>
         {filteredBooks.map((book) => (
           <Link to={`/books/${book.name}`} key={book.name}>

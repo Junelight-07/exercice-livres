@@ -12,9 +12,10 @@ export default function Favorites() {
       <div className={styles["title"]}>Vos favoris</div>
       <Filters />
       <div className={styles["book-cards"]}>
+        {/* il manque les filteredBooks.map */}
         {favoriteBooks.map((book) => (
           <Link to={`/books/${book.name}`} key={book.name}>
-            <BookCard {...book} isFavorite />
+            <BookCard {...book} />
           </Link>
         ))}
       </div>

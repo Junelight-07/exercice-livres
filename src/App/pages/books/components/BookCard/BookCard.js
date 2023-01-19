@@ -7,9 +7,9 @@ export default function BookCard({
   pagesTotales,
   label,
   cover,
-  isFavorite,
 }) {
-  const { addFavorite, removeFavorite } = useBooksContext();
+  const { addFavorite, removeFavorite, favoriteBooks } = useBooksContext();
+  const isFavorite = favoriteBooks.filter((book) => book.name === name).length;
 
   function handleChangeFavorite(e, name) {
     e.preventDefault();

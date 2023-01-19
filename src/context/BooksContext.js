@@ -55,11 +55,13 @@ export default function BooksContextProvider({ children }) {
   }
 
   function addFavorite(name) {
-    const books = [...favoriteBooks].concat(
-      dataBooks.find((book) => book.name === name)
-    );
-    setFavoriteBooks(books);
-    saveLocalFavorites(books);
+    if (!favoriteBooks.filter((book) => book.name === name).length) {
+      const books = [...favoriteBooks].concat(
+        dataBooks.find((book) => book.name === name)
+      );
+      setFavoriteBooks(books);
+      saveLocalFavorites(books);
+    }
   }
 
   function removeFavorite(name) {

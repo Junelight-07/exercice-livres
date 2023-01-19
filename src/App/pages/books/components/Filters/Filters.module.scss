@@ -1,5 +1,12 @@
 .filters {
    display: flex;
+   justify-content: center;
+
+   select,
+   input,
+   button {
+      margin: 0 10px;
+   }
 
    & form {
       right: 0px;
