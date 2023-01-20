@@ -5,15 +5,14 @@ import styles from "./Favorites.module.scss";
 import Filters from "../Filters/Filters";
 
 export default function Favorites() {
-  const { favoriteBooks } = useBooksContext();
+  const { filteredFavoriteBooks } = useBooksContext();
 
   return (
     <div className={styles["favorite"]}>
       <div className={styles["title"]}>Vos favoris</div>
       <Filters />
       <div className={styles["book-cards"]}>
-        {/* il manque les filteredBooks.map */}
-        {favoriteBooks.map((book) => (
+        {filteredFavoriteBooks.map((book) => (
           <Link to={`/books/${book.name}`} key={book.name}>
             <BookCard {...book} />
           </Link>

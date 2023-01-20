@@ -10,6 +10,7 @@ export default function BooksContextProvider({ children }) {
   const [filters, setFilters] = useState(INITIAL_FILTERS);
   const [favoriteBooks, setFavoriteBooks] = useState([]);
   const [filteredBooks, setFilteredBooks] = useState([]);
+  const [filteredFavoriteBooks, setFilteredFavoriteBooks] = useState([]);
 
   const categories = dataBooks.reduce(
     (acc, book) =>
@@ -38,6 +39,20 @@ export default function BooksContextProvider({ children }) {
         )
     );
   }, [filters]);
+
+  useEffect(() => {
+    setFilteredFavoriteBooks(
+      favoriteBooks
+        .filter((book) => {
+          if (filteredBooks.name == favoriteBooks.name)
+            return book.name.includes(filters.search);
+          else return book;
+        })
+        .filter(
+          (book) => !filters.category || filters.category === book.category
+        )
+    );
+  }, [filteredBooks]);
 
   function onCategory(category) {
     setFilters((curr) => ({ ...curr, category }));
@@ -94,6 +109,7 @@ export default function BooksContextProvider({ children }) {
         filters,
         filteredBooks,
         favoriteBooks,
+        filteredFavoriteBooks,
         addFavorite,
         removeFavorite,
         onCategory,
