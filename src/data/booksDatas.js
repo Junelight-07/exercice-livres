@@ -1,4 +1,4 @@
-import books from "./books.json";
+import books from "./booksDatas.json";
 import livreJungle from "../assets/livreJungle.jpg";
 import reineDesNeiges from "../assets/reineDesNeiges.jpg";
 import tomEtJerry from "../assets/tomEtJerry.png";

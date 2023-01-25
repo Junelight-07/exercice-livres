@@ -1,4 +1,4 @@
-import React from "react";
+import React, { useEffect } from "react";
 import { useBooksContext } from "../../../../../context/BooksContext";
 import styles from "./Filters.module.scss";
 
@@ -23,7 +23,6 @@ export default function Filters() {
         type="search"
         placeholder="Un livre en particulier ?"
         value={filters.search}
-        onChange={(e) => onSearch(e.target.value)}
       />
       <button onClick={onResetFilters}>Réinitialiser</button>
     </div>

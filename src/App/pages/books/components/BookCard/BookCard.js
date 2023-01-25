@@ -8,8 +8,11 @@ export default function BookCard({
   label,
   cover,
 }) {
-  const { addFavorite, removeFavorite, favoriteBooks } = useBooksContext();
-  const isFavorite = favoriteBooks.filter((book) => book.name === name).length;
+  const { addFavorite, removeFavorite, favoriteBooks, updateReadPageBook } =
+    useBooksContext();
+  const isFavorite = favoriteBooks.filter(
+    (bookName) => bookName === name
+  ).length;
 
   function handleChangeFavorite(e, name) {
     e.preventDefault();
@@ -25,6 +28,17 @@ export default function BookCard({
       <div className={styles["content"]}>
         <img className={styles["cover"]} src={cover} alt={`cover ${label}`} />
         <div className={styles["name"]}>{label}</div>
+        <div className={styles["pagesLu"]} onClick={(e) => e.preventDefault()}>
+          {"Vous avez lu"}
+          <input
+            type={"number"}
+            min={"0"}
+            max={pagesTotales}
+            defaultValue={pagesLues}
+            onChange={(e) => updateReadPageBook(name, e.target.value)}
+          />
+          {"pages"}
+        </div>
         <ProgressBar value={(pagesLues / pagesTotales) * 100} />
         {pagesLues === pagesTotales && <div>{"Félicitation"}</div>}
         <div className={styles["text"]}>

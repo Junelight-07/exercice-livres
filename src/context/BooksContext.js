@@ -1,5 +1,5 @@
 import React, { useState, useContext, useEffect } from "react";
-import dataBooks from "../data/books";
+import dataBooks from "../data/booksDatas";
 
 const INITIAL_FILTERS = { category: "", search: "" };
 const BooksContext = React.createContext({ books: [], addFavorite: () => {} });
@@ -7,18 +7,25 @@ const BooksContext = React.createContext({ books: [], addFavorite: () => {} });
 export const useBooksContext = () => useContext(BooksContext);
 
 export default function BooksContextProvider({ children }) {
+  const [books, setBooks] = useState([]);
   const [filters, setFilters] = useState(INITIAL_FILTERS);
   const [favoriteBooks, setFavoriteBooks] = useState([]);
   const [filteredBooks, setFilteredBooks] = useState([]);
   const [filteredFavoriteBooks, setFilteredFavoriteBooks] = useState([]);
 
-  const categories = dataBooks.reduce(
+  const categories = books.reduce(
     (acc, book) =>
       acc.includes(book.category) ? acc : acc.concat(book.category),
     []
   );
 
   useEffect(() => {
+    if (getLocalBooks()) {
+      setBooks(getLocalBooks());
+    } else {
+      setBooks(dataBooks);
+      saveLocalBooks(dataBooks);
+    }
     if (getLocalFilters()) {
       setFilters(getLocalFilters());
     }
@@ -29,7 +36,7 @@ export default function BooksContextProvider({ children }) {
 
   useEffect(() => {
     setFilteredBooks(
-      dataBooks
+      books
         .filter((book) => {
           if (filters.search) return book.name.includes(filters.search);
           else return book;
@@ -38,21 +45,19 @@ export default function BooksContextProvider({ children }) {
           (book) => !filters.category || filters.category === book.category
         )
     );
-  }, [filters]);
+  }, [books, filters]);
 
   useEffect(() => {
     setFilteredFavoriteBooks(
       favoriteBooks
-        .filter((book) => {
-          if (filteredBooks.name == favoriteBooks.name)
-            return book.name.includes(filters.search);
-          else return book;
+        .filter((bookName) => bookName.includes(filters.search))
+        .filter((bookName) => {
+          const findedBook = books.find((b) => b.name === bookName);
+          if (!filters.category || filters.category === findedBook.category)
+            return bookName;
         })
-        .filter(
-          (book) => !filters.category || filters.category === book.category
-        )
     );
-  }, [filteredBooks]);
+  }, [filteredBooks, favoriteBooks]);
 
   function onCategory(category) {
     setFilters((curr) => ({ ...curr, category }));
@@ -71,18 +76,30 @@ export default function BooksContextProvider({ children }) {
 
   function addFavorite(name) {
     if (!favoriteBooks.filter((book) => book.name === name).length) {
-      const books = [...favoriteBooks].concat(
-        dataBooks.find((book) => book.name === name)
-      );
-      setFavoriteBooks(books);
-      saveLocalFavorites(books);
+      const updatedBooks = [...favoriteBooks];
+      updatedBooks.push(name);
+      setFavoriteBooks(updatedBooks);
+      saveLocalFavorites(updatedBooks);
     }
   }
 
   function removeFavorite(name) {
-    const books = favoriteBooks.filter((book) => book.name !== name);
-    setFavoriteBooks(books);
-    saveLocalFavorites(books);
+    const updatedBooks = favoriteBooks.filter((bookName) => bookName !== name);
+    setFavoriteBooks(updatedBooks);
+    saveLocalFavorites(updatedBooks);
+  }
+
+  function updateReadPageBook(name, pages) {
+    const updatedBooks = books.map((book) => {
+      if (book.name === name) {
+        return {
+          ...book,
+          pagesLues: pages,
+        };
+      } else return book;
+    });
+    setBooks(updatedBooks);
+    saveLocalBooks(updatedBooks);
   }
 
   function saveLocalFilters(values) {
@@ -101,10 +118,18 @@ export default function BooksContextProvider({ children }) {
     return JSON.parse(localStorage.getItem("favorites"));
   }
 
+  function saveLocalBooks(values) {
+    localStorage.setItem("books", JSON.stringify(values));
+  }
+
+  function getLocalBooks() {
+    return JSON.parse(localStorage.getItem("books"));
+  }
+
   return (
     <BooksContext.Provider
       value={{
-        books: dataBooks,
+        books: books,
         categories,
         filters,
         filteredBooks,
@@ -115,6 +140,7 @@ export default function BooksContextProvider({ children }) {
         onCategory,
         onSearch,
         onResetFilters,
+        updateReadPageBook,
       }}
     >
       {children}

@@ -1,10 +1,10 @@
 import React from "react";
 import { Routes, Route, BrowserRouter } from "react-router-dom";
 import styles from "./App.module.scss";
+import Header from "./pages/Header/Header";
 import Books from "./pages/Books/index";
 import Book from "./pages/Book/index";
 import Favorites from "./pages/Books/components/Favorites/Favorites";
-import logo from "../assets/livresLogo.jpg";
 import BooksContextProvider from "../context/BooksContext";
 import Context from "../test/Context";
 
@@ -27,10 +27,7 @@ export default function App() {
 function Home() {
   return (
     <div className={styles["page"]}>
-      <div className={styles["pageTitle"]}>
-        <h1>Le livre de livres</h1>
-        <img src={logo} alt="logo de livres" />
-      </div>
+      <Header />
       <Books />
     </div>
   );
