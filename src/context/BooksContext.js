@@ -74,6 +74,12 @@ export default function BooksContextProvider({ children }) {
     localStorage.removeItem("filters");
   }
 
+  function addBook(book) {
+    const newBooks = [...books, book];
+    setBooks(newBooks);
+    saveLocalBooks(newBooks);
+  }
+
   function addFavorite(name) {
     if (!favoriteBooks.filter((book) => book.name === name).length) {
       const updatedBooks = [...favoriteBooks];
@@ -141,6 +147,7 @@ export default function BooksContextProvider({ children }) {
         onSearch,
         onResetFilters,
         updateReadPageBook,
+        addBook,
       }}
     >
       {children}

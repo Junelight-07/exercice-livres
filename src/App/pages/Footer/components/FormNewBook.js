@@ -1,23 +1,38 @@
 import { useBooksContext } from "../../../../context/BooksContext";
 import Header from "../../Header/Header";
 import styles from "./FormNewBook.module.scss";
-import { useRef, useState } from "react";
+import { useRef } from "react";
+import { Link } from "react-router-dom";
 
 export default function FormNewBook() {
-  const { books } = useBooksContext();
+  const { books, addBook } = useBooksContext();
 
   const form = useRef();
-
-  const [newBook, setNewBook] = useState("");
 
   function formData(e) {
     e.preventDefault();
     const name = form.current.newBookName.value;
     const label = form.current.newBookLabel.value;
     const category = form.current.newBookCategory.value;
-    const totalPages = form.current.newBookTotalPages.value;
+    const pagesTotales = form.current.newBookTotalPages.value;
     const summary = form.current.newBookSummary.value;
-    setNewBook({ name, label, category, totalPages, summary });
+    const favorite = false;
+    let pagesLues = 0;
+    if (books.includes(name)) {
+      console.log("erreur");
+    } else {
+      addBook({
+        id: "okokok",
+        name,
+        label,
+        category,
+        pagesTotales,
+        pagesLues,
+        favorite,
+        summary,
+      });
+    }
+    console.log("nouvelle liste : ", books);
   }
 
   return (
@@ -83,7 +98,10 @@ export default function FormNewBook() {
           />
         </div>
         <button type="submit">{"Soumettre mon livre"}</button>
-      </form>
+      </form>{" "}
+      <Link className={styles["bookReturnHome"]} to="/books">
+        Retourner au menu principal
+      </Link>
     </>
   );
 }
