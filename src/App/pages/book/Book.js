@@ -1,5 +1,6 @@
 import { Link, useParams } from "react-router-dom";
 import books from "../../../data/booksDatas";
+import Header from "../Header/Header";
 import styles from "./Book.module.scss";
 
 export default function Book() {
@@ -9,6 +10,7 @@ export default function Book() {
   if (!book) return "book does not exist";
   return (
     <>
+      <Header />
       <div className={styles["bookContent"]}>
         <div className={styles["bookTitle"]}>{book.label}</div>
         <div className={styles["bookSummary"]}>{book.summary}</div>

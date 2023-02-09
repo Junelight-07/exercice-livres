@@ -1,0 +1,23 @@
+.pageTitle {
+   display: flex;
+   justify-content: center;
+   font-weight: bold;
+   font-size: 18px;
+}
+
+form {
+   align-items: center;
+   display: flex;
+   flex-direction: column;
+
+   .element {
+      display: flex;
+      width: 70%;
+      max-width: 800px;
+      min-width: 400px;
+      justify-content: space-between;
+      margin: 20px;
+   }
+
+   & button {}
+}
