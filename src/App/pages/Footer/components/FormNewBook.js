@@ -82,7 +82,6 @@ export default function FormNewBook() {
             required
           />
         </div>
-
         <button type="submit">{"Soumettre mon livre"}</button>
       </form>
     </>
