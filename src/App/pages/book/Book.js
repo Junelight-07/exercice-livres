@@ -1,9 +1,11 @@
 import { Link, useParams } from "react-router-dom";
-import books from "../../../data/booksDatas";
+import { useBooksContext } from "../../../context/BooksContext";
 import Header from "../Header/Header";
 import styles from "./Book.module.scss";
 
 export default function Book() {
+  const { books } = useBooksContext();
+
   const { name } = useParams();
   const book = books.find((b) => b?.name === name);
 

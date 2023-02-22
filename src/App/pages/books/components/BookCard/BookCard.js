@@ -26,7 +26,11 @@ export default function BookCard({
   return (
     <div className={styles["book-card"]}>
       <div className={styles["content"]}>
-        <img className={styles["cover"]} src={cover} alt={`cover ${label}`} />
+        <img
+          className={styles["cover"]}
+          src={cover}
+          alt={`cover de '${label}'`}
+        />
         <div className={styles["name"]}>{label}</div>
         <div className={styles["pagesLu"]} onClick={(e) => e.preventDefault()}>
           {"Vous avez lu"}
