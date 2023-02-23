@@ -1,8 +1,8 @@
 import { useBooksContext } from "../../../../context/BooksContext";
 import Header from "../../Header/Header";
+import styles from "./FormNewBook.module.scss";
 import { useRef } from "react";
 import { Link } from "react-router-dom";
-import styles from "./FormNewBook.module.scss";
 
 export default function FormNewBook() {
   const { books, addBook } = useBooksContext();
@@ -33,7 +33,6 @@ export default function FormNewBook() {
       });
     }
     console.log("nouvelle liste : ", books);
-    console.log("test : ", books.includes(name));
   }
 
   return (
