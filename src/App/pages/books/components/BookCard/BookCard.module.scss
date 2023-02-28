@@ -45,3 +45,28 @@
       }
    }
 }
+
+.actionOnFavorite {
+   label {
+      background-color: white;
+      display: flex;
+      align-items: center;
+      gap: 14px;
+      padding: 10px 15px 10px 10px;
+      cursor: pointer;
+      user-select: none;
+      border-radius: 10px;
+      box-shadow: rgba(149, 157, 165, 0.2) 0px 8px 24px;
+      color: black;
+   }
+
+   input {
+      display: none;
+   }
+
+   input:checked+label svg {
+      fill: hsl(0deg 100% 50%);
+      stroke: hsl(0deg 100% 50%);
+   }
+
+}

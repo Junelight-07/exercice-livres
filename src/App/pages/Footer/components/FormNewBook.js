@@ -1,11 +1,12 @@
+import { useRef, useState } from "react";
+import { Link } from "react-router-dom";
 import { useBooksContext } from "../../../../context/BooksContext";
 import Header from "../../Header/Header";
 import styles from "./FormNewBook.module.scss";
-import { useRef } from "react";
-import { Link } from "react-router-dom";
 
 export default function FormNewBook() {
   const { books, addBook } = useBooksContext();
+  const [successMessage, setSuccessMessage] = useState("");
 
   const form = useRef();
 
@@ -18,8 +19,10 @@ export default function FormNewBook() {
     const summary = form.current.newBookSummary.value;
     const favorite = false;
     let pagesLues = 0;
-    if (books.includes(name)) {
-      console.log("erreur");
+    const bookExists = books.some((book) => book.name === name);
+
+    if (bookExists) {
+      setSuccessMessage("Ce livre existe déjà dans la base de donnée");
     } else {
       addBook({
         id: "okokok",
@@ -31,76 +34,90 @@ export default function FormNewBook() {
         favorite,
         summary,
       });
+      setSuccessMessage(
+        "Votre livre a bien été enregistré dans la base de donnée"
+      );
     }
-    console.log("nouvelle liste : ", books);
   }
 
   return (
     <>
       <Header />
-      <div className={styles["pageTitle"]}>
-        {"Formulaire de soumission d'un nouveau livre"}
+      <div className={styles["page"]}>
+        <div className={styles["card"]}>
+          <div className={styles["heading"]}>
+            {"Formulaire de soumission d'un nouveau livre"}
+          </div>
+          <div className={styles["card2"]}>
+            <form action="" ref={form} onSubmit={formData}>
+              <div>
+                <label htmlFor={"bookName"}>
+                  {"Écrire le nom du livre tout en minuscules séparé de tirets"}
+                </label>
+                <input
+                  name="newBookName"
+                  id={"bookName"}
+                  type={"text"}
+                  placeholder={"le-livre-de-la-jungle"}
+                  required
+                />
+              </div>
+              <div>
+                <label htmlFor={"bookLabel"}>{"Écrire le nom du livre"}</label>
+                <input
+                  name="newBookLabel"
+                  id={"bookLabel"}
+                  type={"text"}
+                  placeholder={"Le livre de la Jungle"}
+                  required
+                />
+              </div>
+              <div>
+                <label htmlFor={"bookCategory"}>
+                  {"Écrire la catégorie du livre"}
+                </label>
+                <input
+                  name="newBookCategory"
+                  id={"bookCategory"}
+                  type={"text"}
+                  placeholder={"Metro-Goldwyn-Mayer"}
+                  required
+                />
+              </div>
+              <div>
+                <label htmlFor={"bookTotalPages"}>
+                  {"Écrire le nombre total de pages du livre"}
+                </label>
+                <input
+                  name="newBookTotalPages"
+                  id={"bookTotalPages"}
+                  type={"number"}
+                  placeholder={"350"}
+                  required
+                />
+              </div>
+              <div>
+                <label htmlFor={"bookSummary"}>
+                  {"Écrire le résumé du livre"}
+                </label>
+                <input
+                  name="newBookSummary"
+                  id={"bookSummary"}
+                  type={"text"}
+                  required
+                />
+              </div>
+              <button type="submit">{"Soumettre mon livre"}</button>
+            </form>
+          </div>
+        </div>
+        {successMessage && (
+          <div className={styles["successMessage"]}>{successMessage}</div>
+        )}
       </div>
-      <form action="" ref={form} onSubmit={formData}>
-        <div className={styles["element"]}>
-          <label htmlFor={"bookName"}>
-            {"Écrire le nom du livre tout en minuscules séparé de tirets"}
-          </label>
-          <input
-            name="newBookName"
-            id={"bookName"}
-            type={"text"}
-            placeholder={"le-livre-de-la-jungle"}
-            required
-          />
-        </div>
-        <div className={styles["element"]}>
-          <label htmlFor={"bookLabel"}>{"Écrire le nom du livre"}</label>
-          <input
-            name="newBookLabel"
-            id={"bookLabel"}
-            type={"text"}
-            placeholder={"Le livre de la Jungle"}
-            required
-          />
-        </div>
-        <div className={styles["element"]}>
-          <label htmlFor={"bookCategory"}>
-            {"Écrire la catégorie du livre"}
-          </label>
-          <input
-            name="newBookCategory"
-            id={"bookCategory"}
-            type={"text"}
-            placeholder={"Metro-Goldwyn-Mayer"}
-            required
-          />
-        </div>
-        <div className={styles["element"]}>
-          <label htmlFor={"bookTotalPages"}>
-            {"Écrire le nombre total de pages du livre"}
-          </label>
-          <input
-            name="newBookTotalPages"
-            id={"bookTotalPages"}
-            type={"number"}
-            placeholder={"350"}
-            required
-          />
-        </div>
-        <div className={styles["element"]}>
-          <label htmlFor={"bookSummary"}>{"Écrire le résumé du livre"}</label>
-          <input
-            name="newBookSummary"
-            id={"bookSummary"}
-            type={"text"}
-            required
-          />
-        </div>
-        <button type="submit">{"Soumettre mon livre"}</button>
-      </form>{" "}
+
       <Link className={styles["bookReturnHome"]} to="/books">
-        Retourner au menu principal
+        {"Retourner au menu principal"}
       </Link>
     </>
   );
