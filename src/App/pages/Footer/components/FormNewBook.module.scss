@@ -1,0 +1,101 @@
+.page {
+   display: flex;
+   flex-direction: column;
+   align-items: center;
+}
+
+.card {
+   background: linear-gradient(#00ff75, #3700ff, #00ff75);
+   border-radius: 22px;
+   transition: all .3s;
+   width: 50%;
+   padding: 15px;
+
+   &:hover {
+      box-shadow: 0px 0px 30px 1px rgba(0, 255, 117, 0.30);
+   }
+}
+
+.heading {
+   display: flex;
+   justify-content: center;
+   font-weight: bold;
+   text-align: center;
+   margin: 2em;
+   color: black;
+   font-size: 1.2em;
+}
+
+.card2 {
+   border-radius: 0;
+   transition: all .2s;
+
+   &:hover {
+      transform: scale(0.98);
+      border-radius: 20px;
+   }
+}
+
+form {
+   display: flex;
+   flex-direction: column;
+   gap: 10px;
+   padding: 0.8em 2em;
+   background-color: #171717;
+   border-radius: 20px;
+   margin: 20px;
+
+   label {
+      color: whitesmoke;
+   }
+
+   input {
+      border-radius: 10px;
+      padding: 5px;
+      margin: 4px;
+      background: rgb(195, 195, 195);
+      border: none;
+      outline: none;
+      width: 100%;
+      color: #206cc5;
+   }
+
+   button {
+      padding: 0.5em;
+      padding-left: 1.1em;
+      padding-right: 1.1em;
+      border-radius: 5px;
+      margin-right: 0.5em;
+      border: none;
+      outline: none;
+      transition: .4s ease-in-out;
+      background-image: linear-gradient(163deg, #00ff75 0%, #3700ff 100%);
+      color: rgb(0, 0, 0);
+
+      &:hover {
+         background-image: linear-gradient(163deg, #00642f 0%, #13034b 100%);
+         color: rgb(0, 255, 200);
+      }
+   }
+}
+
+.successMessage {
+   background-color: black;
+   color: red;
+   height: 30px;
+   text-align: center;
+   margin: 50px;
+   padding: 10px;
+   width: 50%;
+}
+
+.bookReturnHome {
+   text-decoration: none;
+   color: blue;
+   font-size: 20px;
+   position: fixed;
+   bottom: 0;
+   margin-bottom: 15px;
+   width: 100%;
+   text-align: center;
+}

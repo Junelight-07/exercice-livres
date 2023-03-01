@@ -1,0 +1,72 @@
+.book-card {
+   width: 225px;
+   height: 100%;
+   display: flex;
+   flex-direction: column;
+   justify-content: space-between;
+   align-items: center;
+   text-align: center;
+
+   .content {
+      .cover {
+         height: 200px;
+         width: 200px;
+         object-fit: cover;
+         border-radius: 20px;
+         margin-bottom: 12px;
+      }
+
+      .name {
+         display: inline-block;
+         padding: 6px 12px;
+         border: 2px solid red;
+         border-radius: 10px;
+         margin: auto;
+         margin-bottom: 12px;
+      }
+
+      .pagesLu {
+         width: 100%;
+
+         input {
+            margin: 0px 5px;
+         }
+      }
+
+      & progress {
+         height: 20px;
+         width: 100%;
+         margin-bottom: 12px;
+      }
+
+      .text {
+         margin-bottom: 12px;
+
+      }
+   }
+}
+
+.actionOnFavorite {
+   label {
+      background-color: white;
+      display: flex;
+      align-items: center;
+      gap: 14px;
+      padding: 10px 15px 10px 10px;
+      cursor: pointer;
+      user-select: none;
+      border-radius: 10px;
+      box-shadow: rgba(149, 157, 165, 0.2) 0px 8px 24px;
+      color: black;
+   }
+
+   input {
+      display: none;
+   }
+
+   input:checked+label svg {
+      fill: hsl(0deg 100% 50%);
+      stroke: hsl(0deg 100% 50%);
+   }
+
+}
