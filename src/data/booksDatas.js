@@ -1,25 +1,19 @@
 import books from "./booksDatas.json";
-import livreJungle from "../assets/livreJungle.jpg";
-import reineDesNeiges from "../assets/reineDesNeiges.jpg";
-import tomEtJerry from "../assets/tomEtJerry.png";
-import petitOursBrun from "../assets/petitOursBrun.jpg";
-import jAimeLire from "../assets/jAimeLire.jpg";
-import droopy from "../assets/droopy.jpg";
 
 function getCovert(name) {
   switch (name) {
     case "le-livre-de-la-jungle":
-      return livreJungle;
+      return "./livreJungle.jpg";
     case "la-reine-des-neiges":
-      return reineDesNeiges;
+      return "./reineDesNeiges.jpg";
     case "tom-et-jerry":
-      return tomEtJerry;
+      return "./tomEtJerry.png";
     case "petit-ours-brun":
-      return petitOursBrun;
+      return "./petitOursBrun.jpg";
     case "jaime-lire":
-      return jAimeLire;
+      return "./jAimeLire.jpg";
     case "droopy":
-      return droopy;
+      return "./droopy.jpg";
     default:
       return null;
   }

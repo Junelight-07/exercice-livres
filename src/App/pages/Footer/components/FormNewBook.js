@@ -1,4 +1,5 @@
-import { useRef, useState } from "react";
+import React, { useState } from "react";
+import uniqid from "uniqid";
 import { Link } from "react-router-dom";
 import { useBooksContext } from "../../../../context/BooksContext";
 import Header from "../../Header/Header";
@@ -7,37 +8,65 @@ import styles from "./FormNewBook.module.scss";
 export default function FormNewBook() {
   const { books, addBook } = useBooksContext();
   const [successMessage, setSuccessMessage] = useState("");
+  const [formData, setFormData] = useState({
+    name: "",
+    label: "",
+    category: "",
+    pagesTotales: "",
+    summary: "",
+    favorite: false,
+    pagesLues: "0",
+  });
 
-  const form = useRef();
+  const handleChangeFormData = (e) => {
+    const { name, value } = e.target;
+    setFormData((prevFormData) => ({
+      ...prevFormData,
+      [name]: value,
+    }));
+  };
 
-  function formData(e) {
+  function resetformData() {
+    setFormData({
+      name: "",
+      label: "",
+      category: "",
+      pagesTotales: "",
+      summary: "",
+      favorite: false,
+      pagesLues: "0",
+    });
+  }
+
+  function formDataSubmit(e) {
     e.preventDefault();
-    const name = form.current.newBookName.value;
-    const label = form.current.newBookLabel.value;
-    const category = form.current.newBookCategory.value;
-    const pagesTotales = form.current.newBookTotalPages.value;
-    const summary = form.current.newBookSummary.value;
-    const favorite = false;
-    let pagesLues = 0;
-    const bookExists = books.some((book) => book.name === name);
+    console.log("fonctionne");
+    // console.log("e", e.target.elements.newBookName.value);
+    // console.log("form", formRef.current.newBookName.value);
+    // const name = formData.name;
+    const bookExists = books.some((book) => book.name === formData.name);
+    console.log("book already exists", bookExists);
+    console.log("books", books);
 
     if (bookExists) {
       setSuccessMessage("Ce livre existe déjà dans la base de donnée");
     } else {
       addBook({
+        // id: uniqid("book-")
         id: "okokok",
-        name,
-        label,
-        category,
-        pagesTotales,
-        pagesLues,
-        favorite,
-        summary,
+        name: formData.name,
+        label: formData.label,
+        category: formData.category,
+        pagesTotales: formData.pagesTotales,
+        pagesLues: formData.pagesLues,
+        favorite: formData.favorite,
+        summary: formData.summary,
       });
       setSuccessMessage(
         "Votre livre a bien été enregistré dans la base de donnée"
       );
     }
+    resetformData();
   }
 
   return (
@@ -49,14 +78,18 @@ export default function FormNewBook() {
             {"Formulaire de soumission d'un nouveau livre"}
           </div>
           <div className={styles["card2"]}>
-            <form action="" ref={form} onSubmit={formData}>
+            <form data-testid="form" onSubmit={formDataSubmit}>
               <div>
                 <label htmlFor={"bookName"}>
-                  {"Écrire le nom du livre tout en minuscules séparé de tirets"}
+                  {
+                    "Écrire le nom du livre tout en minuscules séparés de tirets"
+                  }
                 </label>
                 <input
-                  name="newBookName"
-                  id={"bookName"}
+                  name={"name"}
+                  value={formData.name}
+                  onChange={handleChangeFormData}
+                  data-testid={"bookName"}
                   type={"text"}
                   placeholder={"le-livre-de-la-jungle"}
                   required
@@ -65,11 +98,14 @@ export default function FormNewBook() {
               <div>
                 <label htmlFor={"bookLabel"}>{"Écrire le nom du livre"}</label>
                 <input
-                  name="newBookLabel"
-                  id={"bookLabel"}
+                  name={"label"}
+                  value={formData.label}
+                  onChange={handleChangeFormData}
+                  data-testid={"bookLabel"}
                   type={"text"}
                   placeholder={"Le livre de la Jungle"}
                   required
+                  // onChange={(e) => handleChangeFormData('newBookLabel', e.target.value)}
                 />
               </div>
               <div>
@@ -77,8 +113,10 @@ export default function FormNewBook() {
                   {"Écrire la catégorie du livre"}
                 </label>
                 <input
-                  name="newBookCategory"
-                  id={"bookCategory"}
+                  name={"category"}
+                  value={formData.category}
+                  onChange={handleChangeFormData}
+                  data-testid={"bookCategory"}
                   type={"text"}
                   placeholder={"Metro-Goldwyn-Mayer"}
                   required
@@ -89,9 +127,12 @@ export default function FormNewBook() {
                   {"Écrire le nombre total de pages du livre"}
                 </label>
                 <input
-                  name="newBookTotalPages"
-                  id={"bookTotalPages"}
+                  name={"pagesTotales"}
+                  value={formData.pagesTotales}
+                  onChange={handleChangeFormData}
+                  data-testid={"bookTotalPages"}
                   type={"number"}
+                  min={"1"}
                   placeholder={"350"}
                   required
                 />
@@ -101,22 +142,35 @@ export default function FormNewBook() {
                   {"Écrire le résumé du livre"}
                 </label>
                 <input
-                  name="newBookSummary"
-                  id={"bookSummary"}
+                  name={"summary"}
+                  value={formData.summary}
+                  onChange={handleChangeFormData}
+                  data-testid={"bookSummary"}
                   type={"text"}
                   required
                 />
               </div>
-              <button type="submit">{"Soumettre mon livre"}</button>
+              <button data-testid={"bookSubmit"} type="submit">
+                {"Soumettre mon livre"}
+              </button>
             </form>
           </div>
         </div>
         {successMessage && (
-          <div className={styles["successMessage"]}>{successMessage}</div>
+          <div
+            data-testid={"bookSuccessMessage"}
+            className={styles["successMessage"]}
+          >
+            {successMessage}
+          </div>
         )}
       </div>
 
-      <Link className={styles["bookReturnHome"]} to="/books">
+      <Link
+        data-testid={"bookReturnHome"}
+        className={styles["bookReturnHome"]}
+        to="/books"
+      >
         {"Retourner au menu principal"}
       </Link>
     </>
