@@ -40,19 +40,15 @@ export default function FormNewBook() {
 
   function formDataSubmit(e) {
     e.preventDefault();
-    console.log("fonctionne");
-    // console.log("e", e.target.elements.newBookName.value);
-    // console.log("form", formRef.current.newBookName.value);
-    // const name = formData.name;
     const bookExists = books.some((book) => book.name === formData.name);
-    console.log("book already exists", bookExists);
-    console.log("books", books);
 
     if (bookExists) {
       setSuccessMessage("Ce livre existe déjà dans la base de donnée");
     } else {
       addBook({
+        // commenter pour les test
         // id: uniqid("book-")
+        //decommenter pour les tests
         id: "okokok",
         name: formData.name,
         label: formData.label,

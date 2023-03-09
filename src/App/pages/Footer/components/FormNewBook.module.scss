@@ -29,11 +29,6 @@
 .card2 {
    border-radius: 0;
    transition: all .2s;
-
-   &:hover {
-      transform: scale(0.98);
-      border-radius: 20px;
-   }
 }
 
 form {
