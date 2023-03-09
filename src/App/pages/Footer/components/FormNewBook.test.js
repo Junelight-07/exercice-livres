@@ -6,6 +6,7 @@ import { BrowserRouter } from "react-router-dom";
 
 let mockBooks = [];
 const mockAddBook = jest.fn();
+jest.mock("uniqid", () => (i) => i + "test");
 jest.mock("../../../../context/BooksContext", () => ({
   useBooksContext: () => ({
     books: mockBooks,
@@ -56,7 +57,7 @@ test("submitting a new book", async () => {
   await fireEvent.submit(form);
 
   const bookTestOne = {
-    id: "okokok",
+    id: "book-test",
     name: "le-livre-sur-la-jungle",
     label: "Le livre sur la Jungle",
     category: "MGM",

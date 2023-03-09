@@ -46,10 +46,7 @@ export default function FormNewBook() {
       setSuccessMessage("Ce livre existe déjà dans la base de donnée");
     } else {
       addBook({
-        // commenter pour les test
-        // id: uniqid("book-")
-        //decommenter pour les tests
-        id: "okokok",
+        id: uniqid("book-"),
         name: formData.name,
         label: formData.label,
         category: formData.category,
