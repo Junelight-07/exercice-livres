@@ -98,7 +98,6 @@ export default function FormNewBook() {
                   type={"text"}
                   placeholder={"Le livre de la Jungle"}
                   required
-                  // onChange={(e) => handleChangeFormData('newBookLabel', e.target.value)}
                 />
               </div>
               <div>
