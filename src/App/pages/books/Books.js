@@ -12,7 +12,7 @@ function Books() {
       <div className={styles["books-menu"]}>
         <Filters />
         <Link to={`/books/favorites`}>
-          <div>Favoris</div>
+          <div>{"Favoris"}</div>
         </Link>
       </div>
       <div className={styles["book-cards"]}>
