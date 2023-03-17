@@ -3,17 +3,17 @@ import books from "./booksDatas.json";
 function getCovert(name) {
   switch (name) {
     case "le-livre-de-la-jungle":
-      return "./livreJungle.jpg";
+      return "/livreJungle.jpg";
     case "la-reine-des-neiges":
-      return "./reineDesNeiges.jpg";
+      return "/reineDesNeiges.jpg";
     case "tom-et-jerry":
-      return "./tomEtJerry.png";
+      return "/tomEtJerry.png";
     case "petit-ours-brun":
-      return "./petitOursBrun.jpg";
+      return "/petitOursBrun.jpg";
     case "jaime-lire":
-      return "./jAimeLire.jpg";
+      return "/jAimeLire.jpg";
     case "droopy":
-      return "./droopy.jpg";
+      return "/droopy.jpg";
     default:
       return null;
   }
