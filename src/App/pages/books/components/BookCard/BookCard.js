@@ -49,12 +49,7 @@ export default function BookCard({
             min={"0"}
             max={pagesTotales}
             defaultValue={pagesLues}
-            onChange={(e) => {
-              const newPagesLues = parseInt(e.target.value);
-              if (newPagesLues <= pagesTotales) {
-                updateReadPageBook(name, newPagesLues);
-              }
-            }}
+            onChange={(e) => updateReadPageBook(name, e.target.value)}
           />
           {"pages"}
         </div>
